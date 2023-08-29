@@ -1,4 +1,5 @@
-"""An inherited class object should be able to replace another object inherited from the same class."""
+"""An inherited class object should be able to replace the base class object (interface object) from which it was
+ inherited"""
 
 
 class Rectangle:
