@@ -37,6 +37,7 @@ class OldFunctionPrinter(Machine):
 
 
 # Better approach
+# make smaller interfaces
 
 
 class Printer:
