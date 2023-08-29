@@ -36,6 +36,7 @@ class ProductFilter:  # poor implementation -> doesn't follow Open-Close princip
 
 # Specification Pattern
 
+
 class Specification:
     def is_satisfied(self, item):
         pass
@@ -72,15 +73,14 @@ class BetterFilter(Filter):
                 yield item
 
 
-class AndSpecification(Specification):  # combinator for combining multiple specifications
+class AndSpecification(
+    Specification
+):  # combinator for combining multiple specifications
     def __init__(self, *args):
         self.args = args
 
     def is_satisfied(self, item):
-        return all(map(
-            lambda spec: spec.is_satisfied(item),
-            self.args
-        ))
+        return all(map(lambda spec: spec.is_satisfied(item), self.args))
 
 
 if __name__ == "__main__":
@@ -117,4 +117,3 @@ if __name__ == "__main__":
 
     for p in bf.filter(products, large_blue):
         print(f" - {p.name} is large and blue")
-

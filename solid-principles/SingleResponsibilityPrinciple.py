@@ -17,7 +17,7 @@ class Journal:
 class PersistenceManager:  # Separate class for handling file storage
     @staticmethod
     def save_to_file(journal, filename):
-        with open(filename, 'w') as file:
+        with open(filename, "w") as file:
             file.write(str(journal))
 
 
