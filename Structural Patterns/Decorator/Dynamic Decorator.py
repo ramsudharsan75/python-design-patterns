@@ -19,7 +19,7 @@ class FileWithLogging:
         if key == "file":
             self.__dict__[key] = value
         else:
-            setattr(self.__dict__["file"], key)
+            setattr(self.__dict__["file"], key, value)
 
     def __delattr__(self, item):
         delattr(self.__dict__["file"], item)

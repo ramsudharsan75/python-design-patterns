@@ -1,46 +1,30 @@
+from bisect import bisect_right
+from collections import defaultdict
 from math import inf
 from typing import List
 
 
 class Solution:
-    def minimumEffortPath(self, heights: List[List[int]]) -> int:
-        goal = float(inf)
-        reached_target = False
-        movements = [(0, 1), (1, 0), (-1, 0), (0, -1)]
-        rows, cols = len(heights), len(heights[0])
-        visited = set()
+    def removeDuplicateLetters(self, s: str) -> str:
+        mem = defaultdict(list)
 
-        def dfs(r, c, pathCost):
-            nonlocal goal, reached_target
+        for i, ch in enumerate(s):
+            mem[ch].append(i)
 
-            if r == rows - 1 and c == cols - 1:
-                goal = min(goal, pathCost)
-                reached_target = True
-                return
+        prev = None
+        res = {}
 
-            prev_height = heights[r][c]
+        for ch in sorted(set(s)):
+            if prev is None:
+                res[ch] = mem[ch][0]
+            else:
+                x = min(len(mem[ch]) - 1, bisect_right(mem[ch], prev))
+                res[ch] = mem[ch][x]
 
-            for i, j in movements:
-                x, y = r + i, c + j
+            prev = res[ch]
 
-                if 0 <= x < rows and 0 <= y < cols:
-                    if (x, y) in visited:
-                        continue
-
-                    height = heights[x][y]
-                    cost = abs(height - prev_height)
-
-                    if reached_target and cost > goal:
-                        continue
-
-                    visited.add((x, y))
-                    dfs(x, y, pathCost)
-                    visited.remove((x, y))
-
-        visited.add((0, 0))
-        dfs(0, 0, 0)
-        return goal
+        return "".join(list(sorted(res.keys(), key=lambda ch: res[ch])))
 
 
 s = Solution()
-s.minimumEffortPath([[1, 2, 2], [3, 8, 2], [5, 3, 5]])
+s.removeDuplicateLetters("bcabc")
