@@ -1,30 +1,46 @@
 from bisect import bisect_right
-from collections import defaultdict
+from collections import defaultdict, deque
 from math import inf
 from typing import List
 
 
 class Solution:
-    def removeDuplicateLetters(self, s: str) -> str:
-        mem = defaultdict(list)
+    def minimumTime(self, n: int, relations: List[List[int]], time: List[int]) -> int:
+        mat = defaultdict(list)
+        indegrees = [0] * n
+        roots = set(i for i in range(n))
 
-        for i, ch in enumerate(s):
-            mem[ch].append(i)
+        for pre, post in relations:
+            mat[pre - 1].append(post - 1)
+            indegrees[post - 1] += 1
 
-        prev = None
-        res = {}
+            if indegrees[post - 1] > 0:
+                roots.discard(post - 1)
 
-        for ch in sorted(set(s)):
-            if prev is None:
-                res[ch] = mem[ch][0]
-            else:
-                x = min(len(mem[ch]) - 1, bisect_right(mem[ch], prev))
-                res[ch] = mem[ch][x]
+        res = 0
+        q = deque()
 
-            prev = res[ch]
+        for root in roots:
+            period = time[root]
+            res = max(res, period)
+            q.append((root, period))
 
-        return "".join(list(sorted(res.keys(), key=lambda ch: res[ch])))
+        print(q)
+        mem = defaultdict(int)
+
+        while q:
+            course, period = q.popleft()
+
+            for child in mat[course]:
+                if mem[child] >= period + time[course]:
+                    continue
+
+                mem[child] = period + time[course]
+                res = max(res, mem[child])
+                q.append((child, mem[child]))
+
+        return res
 
 
 s = Solution()
-s.removeDuplicateLetters("bcabc")
+s.minimumTime(3, [[1, 3], [2, 3]], [3, 2, 5])
