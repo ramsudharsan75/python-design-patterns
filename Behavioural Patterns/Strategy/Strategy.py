@@ -15,18 +15,18 @@ class ListStrategy(ABC):
 
 class MarkdownListStrategy(ListStrategy):
     def add_list_item(self, buffer, item):
-        buffer.append(f' * {item}\n')
+        buffer.append(f" * {item}\n")
 
 
 class HtmlListStrategy(ListStrategy):
     def start(self, buffer):
-        buffer.append('<ul>\n')
+        buffer.append("<ul>\n")
 
     def end(self, buffer):
-        buffer.append('</ul>\n')
+        buffer.append("</ul>\n")
 
     def add_list_item(self, buffer, item):
-        buffer.append(f'  <li>{item}</li>\n')
+        buffer.append(f"  <li>{item}</li>\n")
 
 
 class OutputFormat(Enum):
@@ -45,24 +45,24 @@ class TextProcessor:
 
         for item in items:
             ls.add_list_item(self.buffer, item)
-        
+
         ls.end(self.buffer)
-    
+
     def set_output_format(self, format):
         if format == OutputFormat.MARKDOWN:
             self.list_strategy = MarkdownListStrategy()
         elif format == OutputFormat.HTML:
             self.list_strategy = HtmlListStrategy()
-        
+
     def clear(self):
         self.buffer.clear()
 
     def __str__(self) -> str:
-        return ''.join(self.buffer)
-    
+        return "".join(self.buffer)
 
-if __name__ == '__main__':
-    items = ['foo', 'bar', 'baz']
+
+if __name__ == "__main__":
+    items = ["foo", "bar", "baz"]
 
     tp = TextProcessor()
     tp.set_output_format(OutputFormat.MARKDOWN)

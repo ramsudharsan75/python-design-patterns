@@ -6,7 +6,7 @@ class Database:
             cls._instance = super(Database, cls).__new__(cls, *args, **kwargs)
 
         return cls._instance
-    
+
     def __init__(self) -> None:
         print("Loading a database from file")
 

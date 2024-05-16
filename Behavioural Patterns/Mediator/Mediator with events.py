@@ -43,7 +43,7 @@ if __name__ == "__main__":
     game = Game()
     player = Player("Sam", game)
     coach = Coach(game)
-    
+
     player.score()
     player.score()
     player.score()

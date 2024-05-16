@@ -32,12 +32,14 @@ class EmployeeFactory:
 
     @staticmethod
     def new_main_office_employee(name):
-        return EmployeeFactory.__new_employee(EmployeeFactory.main_office_employee, name)
-    
+        return EmployeeFactory.__new_employee(
+            EmployeeFactory.main_office_employee, name
+        )
+
     @staticmethod
     def new_aux_office_employee(name):
         return EmployeeFactory.__new_employee(EmployeeFactory.aux_office_employee, name)
-    
+
 
 jane = EmployeeFactory.new_main_office_employee("Jane")
 john = EmployeeFactory.new_aux_office_employee("John")

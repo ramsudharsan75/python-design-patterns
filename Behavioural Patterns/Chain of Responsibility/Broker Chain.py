@@ -88,5 +88,5 @@ if __name__ == "__main__":
 
     with DoubleAttackModifier(game, goblin):
         print(goblin)
-        
+
     print(goblin)

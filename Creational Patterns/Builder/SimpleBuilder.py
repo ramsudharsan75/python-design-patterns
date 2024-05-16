@@ -21,14 +21,14 @@ class HtmlBuilder:
 
     def __str__(self) -> str:
         return str(self.__root)
-    
+
     @staticmethod
     def create(root_name):
         return HtmlBuilder(root_name)
-    
 
-builder = HtmlBuilder.create('ul')
-builder.add_child_fluent('li', 'hello')
-builder.add_child_fluent('li', 'world')
+
+builder = HtmlBuilder.create("ul")
+builder.add_child_fluent("li", "hello")
+builder.add_child_fluent("li", "world")
 print("Ordinary builder:")
 print(builder)

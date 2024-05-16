@@ -84,11 +84,13 @@ class MoneyTransferCommand(CompositeBankAccountCommand):
     def __init__(self, from_acct, to_acct, amount):
         super().__init__(
             [
-                BankAccountCommand(from_acct, BankAccountCommand.Action.WITHDRAW, amount),
+                BankAccountCommand(
+                    from_acct, BankAccountCommand.Action.WITHDRAW, amount
+                ),
                 BankAccountCommand(to_acct, BankAccountCommand.Action.DEPOSIT, amount),
             ]
         )
-    
+
     def invoke(self):
         ok = True
 
@@ -144,7 +146,7 @@ class TestSuite(unittest.TestCase):
         transfer.undo()
         print(f"ba1: {ba1}, ba2: {ba2}")
         print(f"transfer success: {transfer.success}")
-        
+
 
 if __name__ == "__main__":
     unittest.main()

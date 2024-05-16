@@ -70,7 +70,9 @@ class Relationships(RelationshipBrowser):  # low-level module
 
 
 class Research:  # high level module
-    def __init__(self, browser, name) -> None:  # uses browser which is an interface (high level)
+    def __init__(
+        self, browser, name
+    ) -> None:  # uses browser which is an interface (high level)
         for p in browser.find_all_children_of(name):
             print(f"{name} has a child called {p}.")
 

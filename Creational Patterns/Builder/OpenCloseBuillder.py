@@ -5,10 +5,10 @@ class Person:
         self.hobby = None
 
 
-class PersonBuilder():
+class PersonBuilder:
     def __init__(self, person=Person()):
         self.person = person
-    
+
     def build(self):
         return self.person
 

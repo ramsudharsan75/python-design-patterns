@@ -55,7 +55,7 @@ def traverse_inorder(root):
         if current.right:
             for right in traverse(current.right):
                 yield right
-    
+
     for node in traverse(root):
         yield node
 
